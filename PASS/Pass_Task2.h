@@ -9,11 +9,11 @@ private:
     int denominator;
     int quotient;
     int remainder;
-    void calculateQuotientRemainder();
+    
 
 public:
     void set(int, int);
-    
+    void calculateQuotientRemainder();    
     void print();
 };
 
@@ -31,7 +31,7 @@ void division::calculateQuotientRemainder()
 
 void division::print()
 {
-    calculateQuotientRemainder();
+    
     cout << "The quotient of " << numerator << "/" << denominator << " is: " << quotient << endl;
     cout << "The remainder of " << numerator << "/" << denominator << " is: " << remainder << endl;
 }

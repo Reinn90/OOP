@@ -63,7 +63,7 @@ int calculateMin(const int array[], int size, int &position)
 
 int main()
 {
-    int arr[DECLARED_SIZE], listSize, target, position;
+    int arr[DECLARED_SIZE], listSize, target;
 
 
     fillArray(arr, DECLARED_SIZE, listSize);
@@ -82,7 +82,9 @@ int main()
     
     
     // Function to locate the smallest value in the array
-    int min = calculateMin(arr, DECLARED_SIZE, position);
+    int position;
+
+    int min = calculateMin(arr, listSize, position);  // listSize is the actual size of the array from input
 
     cout << "The smallest number in the array is " << min << ", and is stored in array position "
          << position << endl;

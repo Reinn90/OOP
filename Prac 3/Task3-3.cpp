@@ -87,6 +87,8 @@ void addMove(int board[][3], int x, int y, int player)
 	board[x][y] = player; // add 1 or -1 to the matrix that will determine what is displayed
 }
 
+
+// Task 3.4
 int gameStatus(int board[][3], int &noOfMoves)
 {
 	// Write your code here to check if the game has been in a win status or a draw status

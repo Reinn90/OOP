@@ -15,8 +15,8 @@ int main(){
     cin >> num >> den; cout << endl;
 
     d.set(num,den); //pass to object
-    
-    d.print(); // calculate quotient and remainder and print result
+    d.calculateQuotientRemainder(); //calculate quotient and remainder 
+    d.print(); //  and print result
 
     return 0;
 }
