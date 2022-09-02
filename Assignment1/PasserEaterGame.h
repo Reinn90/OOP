@@ -39,6 +39,10 @@ void PasserEaterGame::play()
     // debugger
     cout << boardSize << endl;
 
+    // create the dynamic board
+    
+
+
     int done = 0;
 
     while (done == 0)
