@@ -8,6 +8,7 @@ using namespace std;
 
 class Date {
 private:
+	// doesn't print out, as it is replaced by the constructor
 	int day = 20;
 	int month = 8;
 	int year = 2018;

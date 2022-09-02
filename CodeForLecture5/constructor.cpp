@@ -30,7 +30,7 @@ int main() {
 	A a;
 	cout << a.value() << endl;
 
-	//B b; // if you have a constructor, there is no default constructor.
+	//B b; //if you have a constructor, there is no default constructor.
 
 	//cout << b.value() << endl;
 
