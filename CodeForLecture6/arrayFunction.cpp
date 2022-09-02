@@ -13,12 +13,15 @@ int* f(int size) {
 }
 
 int main() {
-	int *ptr, size = 5;
+	int *ptr, size = 3;
 
 	ptr = f(size);
 
 for(int i=0;i<5;i++)
 	cout << ptr[i] << " ";
 
+	delete ptr;
+	
 	return 0;
+	
 }

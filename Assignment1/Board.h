@@ -36,7 +36,10 @@ public:
     bool isValidInput(int player, int r, int c);
     void addMove(int player, int r, int c);
     void displayBoard();
+
+    
 };
+
 
 void Board::displayBoard()
 {

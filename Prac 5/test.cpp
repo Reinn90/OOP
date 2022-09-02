@@ -9,10 +9,9 @@ int main()
     pa = &a;
 
     cout << "Value of a: " << a << endl;
-    cout << "Memory address of pa: " << &pa << endl; // memory address
-    cout << "Value of pa: " << *pa << endl; // value of 10
+    cout << "Memory address of pa: " << pa << endl; // memory address, CAN ALSO USE &pa
+    cout << "Value of pa: " << *pa << endl; // value of 10, USING * TO DEREFERENCE 
 
-    cout << pa;
 
     return 0;
 }

@@ -15,29 +15,25 @@ using namespace std;
 int main()
 {
 	srand(time(0));
-//     TicTacToe board;
-//     board.play();
+	//	TicTacToe board;
+	//	board.play();
 
-//	     TicTacToe *board;
-//	     board = new TicTacToe;
-//	     board->play();
+	// TicTacToe *board;
+	// board = new TicTacToe;
+	// board->play();
 
 	TicTacToe firstBoard;
 	firstBoard.addMove('X', 1, 2);
 	firstBoard.displayBoard();
 
-//	TicTacToe secondBoard;
-//	secondBoard.displayBoard();
-//
-//	secondBoard = firstBoard;
-//	secondBoard.displayBoard();
+	// TicTacToe secondBoard;
+	// secondBoard.displayBoard();
 
-	TicTacToe* thirdBoardPtr = new TicTacToe(firstBoard);
+	// secondBoard = firstBoard;
+	// secondBoard.displayBoard();
+
+	TicTacToe *thirdBoardPtr = new TicTacToe(firstBoard);
 	thirdBoardPtr->displayBoard();
 
-
-
-     return 0;
+	return 0;
 }
-
-
