@@ -5,57 +5,81 @@
 #include <iomanip>
 #include <string>
 
+using namespace std;
+
 #include "Board.h"
 #include "Player.h"
 
-using namespace std;
-
 class PasserEaterGame
 {
-
-private:
-    Board board;
-    Player player;
+    Board *board;
+    Player *player[2];
 
 public:
-    void play();
-};
-
-void PasserEaterGame::play()
-{
-    // Take in user input to dynamically set the boardsize
-    cout << "Welcome to Passer vs Eater game.\n"
-         << endl;
-    cout << "What board game size do you want to play with? (Hint: Enter an integer between 3-15)" << endl;
-
-    int boardSize;
-    cin >> boardSize;
-
-    if (boardSize < 3 || boardSize > 15){
-        cout << "That value is invalid. Defaulting to a 5x5 board."<< endl << endl;
-        boardSize = 5;
-    }
-
-    // debugger
-    cout << boardSize << endl;
-
-    // create the dynamic board
-    
-
-
-    int done = 0;
-
-    while (done == 0)
+    PasserEaterGame(Board *b, Player *p1, Player *p2)
     {
-        int r1, c1, r2, c2;
-
-        board.displayBoard();
-        player.getMove(board.player, r1, c1); // passer
-        board.addMove(board.player, r1, c1);
-
-        player.getMove(board.player, r2, c2); // Eater
-        board.addMove(board.player, r2, c2);
+        board = b;
+        player[0] = p1;
+        player[1] = p2;
     }
-}
+
+    ~PasserEaterGame()
+    {
+        delete player[0];
+        delete player[1];
+    }
+
+    void play()
+    {
+        board->displayBoard();
+        bool done = false;
+        int playerInt = 1;
+
+        while (!done)
+        {
+            // adjust for indexing
+            int x = -1;
+            int y = -1;
+
+            if (playerInt == 1)
+            {
+                player[0]->getMove(board, x, y);
+                board->addMove(playerInt, x, y);
+                cout << "Passer makes a move (" << (x + 1) << "," << (y + 1) << ") "
+                     << endl;
+                done = checkWin(playerInt, board);
+                playerInt = -1;
+            }
+            else
+            {
+                player[1]->getMove(board, x, y);
+                board->addMove(playerInt, x, y);
+                cout << "Eater makes a move (" << (x + 1) << "," << (y + 1) << ") "
+                     << endl;
+                done = checkWin(playerInt, board);
+                playerInt = 1;
+            }
+            board->displayBoard();
+        }
+    }
+
+    bool checkWin(int playerInt, Board *board)
+    {
+        int gStatus = board->gameStatus();
+
+        if (gStatus == 1)
+        {
+            cout << "Passer wins!" << endl;
+            return true;
+        }
+        else if (gStatus == -1)
+        {
+            cout << "Eater wins!" << endl;
+            return true;
+        }
+        else
+            return false;
+    }
+};
 
 #endif
