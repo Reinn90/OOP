@@ -12,7 +12,7 @@ cout << "Input a string whatever you like" << endl;
 // cout << s << endl;
 
 
-getline(cin, s);
+getline(cin, s); // better at taking in string with whitespace
 cout << s << endl;
 
 return 0;

@@ -14,7 +14,7 @@ int main() {
 
 	cout << "MAX_GAME in C styple " << MAX_GAME << endl;
 
-	cout << "max_game in C++ styple " << max_game << endl;
+	cout << "max_game in C++ style " << max_game << endl;
 
 //	max_game = 1000;
 

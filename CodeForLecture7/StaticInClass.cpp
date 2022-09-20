@@ -16,6 +16,9 @@ int ExampleStatic::x = 10;
 
 int main() {
   ExampleStatic ws;
+  ws.next();
+  ws.print();
+  ws.next();
   ws.print();
   return 0;
 } 

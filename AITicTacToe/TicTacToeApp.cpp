@@ -24,10 +24,10 @@ int main()
 {
 	srand(time(0));
 	RandomPlayer* xplayer = new RandomPlayer('X');
-	// MiniMaxPlayer *xplayer = new MiniMaxPlayer('X');
-	// MonteCarloPlayer* oplayer = new MonteCarloPlayer('O');
+	//  MiniMaxPlayer *xplayer = new MiniMaxPlayer('X');
+	MonteCarloPlayer* oplayer = new MonteCarloPlayer('O');
 	// MindfulPlayer *oplayer = new MindfulPlayer('O');
-	RandomPlayer* oplayer = new RandomPlayer('O');
+	// RandomPlayer* oplayer = new RandomPlayer('O');
 
 	Game game(xplayer, oplayer);
 

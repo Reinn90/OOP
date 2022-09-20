@@ -23,7 +23,7 @@ using namespace std;
 class HumanPlayer : public Player
 {
 public:
-    HumanPlayer(int p) : Player(p){};
+    HumanPlayer(int p, string n) : Player(p, n){};
     ~HumanPlayer(){};
 
     void getMove(Board *board, int &x, int &y)
@@ -46,9 +46,11 @@ public:
             x = x - 1;
             y = y - 1;
 
-        } while (!board->isValidInput(x, y));
+        } while (!board->isValidInput(player,x, y));
 
         return;
+
+        
     }
 };
 

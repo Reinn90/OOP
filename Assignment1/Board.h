@@ -1,40 +1,48 @@
+/*
+ * Nowell Kevin Reyes - 20658133
+ */
 #ifndef BOARD
 #define BOARD
 
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
 class Board
 {
+    int dim;       // dimension of the board grid
     int noOfMoves; // number of moves
-    int **board;  // dynamic board pointer
+    int maxMove;   // when board is full
+    int **board;   // dynamic board pointer
+    int **grid;
+
+    string passerName;
+    string eaterName;
+
 public:
-    int dim; // dimension of the board grid
-
-    // int player;
-    // char playerSymbol;
-    // int r, c;
-
     Board(); // default constructor
     // Constructor
-    Board(int size)
+    Board(int size, string P, string E)
     {
 
         dim = size;
+        passerName = P;
+        eaterName = E;
+        maxMove = dim * dim;
 
         // initiate pointer of pointer variable of user input size
-        board = new int *[size];
+        board = new int *[dim];
 
         // create dynamic 2D array
-        for (int i = 0; i < size; i++)
-            board[i] = new int[size];
+        for (int i = 0; i < dim; i++)
+            board[i] = new int[dim];
 
         // fill the array with zeroes to specify that a cell is empty
-        for (int row = 0; row < size; row++)
-            for (int col = 0; col < size; col++)
+        for (int row = 0; row < dim; row++)
+            for (int col = 0; col < dim; col++)
                 board[row][col] = 0;
 
         noOfMoves = 0;
@@ -49,63 +57,78 @@ public:
         delete[] board;
     }
 
-    // Copy Constructor
+    // Copy Constructor - taken from Lecture slides
     Board(const Board &cboard)
     {
-        for (int row = 0; row < dim; row++)
-            for (int col = 0; col < dim; col++)
-                board[row][col] = cboard.board[row][col];
+        dim = cboard.dim;
+
+        grid = new int *[dim];
+
+        for (int i = 0; i < dim; i++)
+            grid[i] = new int[dim];
+
+        for (int i = 0; i < dim; i++)
+        {
+            for (int j = 0; j < dim; j++)
+                grid[i][j] = cboard.grid[i][j];
+        }
 
         noOfMoves = cboard.noOfMoves;
     }
 
-    char getGrid(int i, int j) { return board[i][j]; };
+    int getGrid(int i, int j) { return board[i][j]; }; // taken from PASS practical code
+
+    int getDim() { return dim; }
 
     bool isFull() { return noOfMoves >= dim * dim; }; // maximum No of moves is the dimesion squared
 
     void displayBoard() const;
 
-    bool isValidInput(int x, int y) const;
+    bool isValidInput(int playerInt, int x, int y) const;
 
-    void addMove(int playerInt, int x, int y);
+    void addMove(int x1, int y1, int x2, int y2);
 
     int gameStatus();
 
-    void reStart();
+    bool checkWin(int x, int y);
 
-    // int threatenLevel(char playerId);
+    int threatenLevel(int playerInt);
 
-    // vector<int> getEmptyPositions();
-    // void getaRandomMove(int &x, int &y);
+    vector<int> getEmptyPositions();
+
+    
 };
 
+bool Board::checkWin(int x, int y)
+{
+    if (x >= 0 && x < dim && y >= 0 && y < dim && board[x][y] == 1)
+    {
 
-int Board::gameStatus() {
-	//Check rows for a win
-	for (int row = 0; row < 3; row++)
-		if (board[row][0] != ' ' && (board[row][0] == board[row][1])
-				&& (board[row][1] == board[row][2]))
-			return board[row][0];
+        if (x >= dim - 1 && board[x][y] == 1) 
+            return true;
+        if (checkWin(x + 1, y - 1))
+            return true; // bottom left
+        if (checkWin(x + 1, y + 1))
+            return true; // bottom right
+        if (checkWin(x + 1, y))
+            return true; // bottom
+    }
+    return false;
+}
 
-	//Check columns for a win
-	for (int col = 0; col < 3; col++)
-		if (board[0][col] != ' ' && (board[0][col] == board[1][col])
-				&& (board[1][col] == board[2][col]))
-			return board[0][col];
+int Board::gameStatus()
+{
+    // Passer win condition - recursion technique
+    for (int col = 0; col < dim; col++)
+    {
+        if (checkWin(0, col) == true) return 1;    
+    }
 
-	//Check diagonals for a win
-	if (board[0][0] != ' ' && (board[0][0] == board[1][1])
-			&& (board[1][1] == board[2][2]))
-		return board[0][0];
+    // Eater win condition - when board is full
+    if (noOfMoves >= maxMove)  return -1;
+    
 
-	if (board[2][0] != ' ' && (board[2][0] == board[1][1])
-			&& (board[1][1] == board[0][2]))
-		return board[2][0];
-
-	if (noOfMoves >= dim*dim)
-		return -1; // Eater wins
-
-	return 0; // continu
+    return 0; // continue the game
 }
 
 void Board::displayBoard() const
@@ -135,16 +158,16 @@ void Board::displayBoard() const
         for (int j = 0; j < dim; j++)
         {
             char playerSymbol = ' ';
-            
-             if (board[i][j] == 1) // Passer has occupied the cell
-                 playerSymbol = 'P';
 
-             else if (board[i][j] == -1) // Eater has occupied the cell
-                 playerSymbol = 'E';
-            
-             //cout << setw(2) << playerSymbol << setw(2);
-             cout << setw(2) << playerSymbol << setw(2);
-            
+            if (board[i][j] == 1) // Passer has occupied the cell
+                playerSymbol = 'P';
+
+            else if (board[i][j] == -1) // Eater has occupied the cell
+                playerSymbol = 'E';
+
+            // cout << setw(2) << playerSymbol << setw(2);
+            cout << setw(2) << playerSymbol << setw(2);
+
             if (j != dim) // display the two middle vertical dividers
                 cout << "|";
         }
@@ -162,73 +185,135 @@ void Board::displayBoard() const
     cout << "-" << endl;
 }
 
-bool Board::isValidInput(int row, int col) const
+bool Board::isValidInput(int playerInt, int row, int col) const
 {
 
     if (0 <= row && row <= (dim - 1) && 0 <= col && col <= (dim - 1) && board[row][col] == 0)
         return true;
     else
     {
-        cout << "Those coordinates are out of bounds or cell already occupied. Please enter an integer between "
-             << "1-" << dim << " to play." << endl;
-        cout << "Please enter move coordinates: ";
-        return false;
-    }
-
-    /*
-    if (player == -1) // eater only check for boundaries
-    {
-        if ((r >= 0 && r < boardSize) && (c >= 0 && c < boardSize))
-            return true;
-        else
+        if ((passerName == "Passer(Human)" && eaterName == "Eater(Human)") )
         {
+            string playerString;
+            playerString = (playerInt == 1) ? "Passer" : "Eater";
             cout << "Those coordinates are out of bounds or cell already occupied. Please enter an integer between "
-                 << "1-" << boardSize << " to play." << endl;
-            cout << "Please enter move coordinates: ";
+                 << "1-" << dim << " to play.\n"
+                 << endl;
+            cout << "Please enter " << playerString << " move coordinates: ";
             return false;
         }
+        else
+            return false;
+    }
+}
+
+void Board::addMove(int x1, int y1, int x2, int y2)
+{
+    board[x1][y1] = 1; // passer move
+
+    // if eater move is the same, overwrite it and only 1 move is counted
+    if (x2 == x1 && y2 == y1)
+    {
+        board[x1][y1] = -1;
+        noOfMoves--;
     }
     else
-    {
-        // board[r][c] == 0 : if the coordinate on the board is empty
-        // (r >= 0 && c >= 0) && (r < row_max && c < col_max): checking the pair to check if within boundary
-        if ((r >= 0 && r < boardSize) && (c >= 0 && c < boardSize) && board[r][c] == 0)
-            return true;
-        else
-        {
-            cout << "Those coordinates are out of bounds or cell already occupied. Please enter an integer between "
-                 << "1-" << boardSize << " to play." << endl;
-            cout << "Please enter move coordinates: ";
-            return false;
-        }
-    }
-    */
-}
-
-void Board::addMove(int playerInt, int x, int y)
-{
-    if(!isValidInput(x,y))
-        return;
-    
-    board[x][y] = playerInt;
+        board[x2][y2] = -1;
 
     noOfMoves++;
-
-    // board[r][c] = player * -1; // add 1 or -1 to the matrix that will determine what is displayed
-
-    // // eater
-    // if (player == -1 && board[r][c] == 1)
-    // {
-    //     board[r][c] = -1;
-    // }
+    noOfMoves++; // count two moves
 }
 
-void Board::reStart() {
-	for (int row = 0; row < 3; row++)
-		for (int col = 0; col < 3; col++)
-			board[row][col] = ' ';
+/*
+ * Methods below this line are repurposed
+ * from PASS practical code + lecture slides
+ * Created on: 24 Jul 2020
+ * Author: dongmo
+ */
 
-	noOfMoves = 0;
+vector<int> Board::getEmptyPositions()
+{
+    vector<int> emptyCells;
+    for (int i = 0; i < dim; i++)
+    {
+        for (int j = 0; j < dim; j++)
+        {
+            if (board[i][j] == 0)
+                emptyCells.push_back(i * dim + j);
+        }
+    }
+    random_shuffle(emptyCells.begin(), emptyCells.end());
+
+    return emptyCells;
+}
+
+int Board::threatenLevel(int playerInt)
+{
+    int max = 0;
+    int opponent = (playerInt == 1) ? -1 : 1;
+    for (int row = 0; row < dim; row++)
+    {
+        int counter = 0;
+        for (int col = 0; col < dim; col++)
+        {
+            if (board[row][col] == playerInt)
+            {
+                counter = 0;
+                break;
+            }
+            else if (board[row][col] == opponent)
+                counter++;
+        }
+        if (counter > max)
+            max = counter;
+    }
+
+    for (int col = 0; col < dim; col++)
+    {
+        int counter = 0;
+        for (int row = 0; row < dim; row++)
+        {
+            if (board[row][col] == playerInt)
+            {
+                counter = 0;
+                break;
+            }
+            else if (board[row][col] == opponent)
+                counter++;
+        }
+        if (counter > max)
+            max = counter;
+    }
+
+    int counter = 0;
+    for (int k = 0; k < dim; k++)
+    {
+        if (board[k][k] == playerInt)
+        {
+            counter = 0;
+            break;
+        }
+        else if (board[k][k] == opponent)
+            counter++;
+    }
+    if (counter > max)
+        max = counter;
+
+    counter = 0;
+    for (int k = 0; k < dim; k++)
+    {
+        if (board[k][2 - k] == playerInt)
+        {
+            counter = 0;
+            break;
+        }
+        else if (board[k][2 - k] == opponent)
+            counter++;
+    }
+    if (counter > max)
+        max = counter;
+
+    return max;
 }
 
 #endif

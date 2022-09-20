@@ -16,10 +16,12 @@ class Player
 {
 protected:
     int player;
+    string name;
 public:
 
-    Player(int p){
+    Player(int p, string n){
         player = p;
+        name = n;
     }
 
     virtual ~Player(){}
@@ -28,6 +30,10 @@ public:
 
     int getplayer() {
         return player;
+    }
+
+    string getName(){
+        return name;
     }
 };
 

@@ -32,53 +32,44 @@ public:
     void play()
     {
         board->displayBoard();
-        bool done = false;
+
+        int done = 0;
         int playerInt = 1;
 
-        while (!done)
+        while (done == 0)
         {
-            // adjust for indexing
-            int x = -1;
-            int y = -1;
+            int x1, y1, x2, y2;
 
-            if (playerInt == 1)
-            {
-                player[0]->getMove(board, x, y);
-                board->addMove(playerInt, x, y);
-                cout << "Passer makes a move (" << (x + 1) << "," << (y + 1) << ") "
-                     << endl;
-                done = checkWin(playerInt, board);
-                playerInt = -1;
-            }
-            else
-            {
-                player[1]->getMove(board, x, y);
-                board->addMove(playerInt, x, y);
-                cout << "Eater makes a move (" << (x + 1) << "," << (y + 1) << ") "
-                     << endl;
-                done = checkWin(playerInt, board);
-                playerInt = 1;
-            }
+            // Passer's move
+            player[0]->getMove(board, x1, y1);
+            playerInt = -1;
+
+            // Eater's move
+            player[1]->getMove(board, x2, y2);
+            playerInt = 1;
+
+            cout << player[0]->getName() << " makes a move (" << (x1 + 1) << "," << (y1 + 1) << ") "
+                 << endl;
+            cout << player[1]->getName() << " makes a move (" << (x2 + 1) << "," << (y2 + 1) << ") "
+                 << endl;
+
+            // Add both moves to the board
+            board->addMove(x1, y1, x2, y2);
+
+            // update the board display
             board->displayBoard();
-        }
-    }
 
-    bool checkWin(int playerInt, Board *board)
-    {
-        int gStatus = board->gameStatus();
+            // check the game status
+            done = board->gameStatus();
 
-        if (gStatus == 1)
-        {
-            cout << "Passer wins!" << endl;
-            return true;
+            if (done == 1)
+                cout << player[0]->getName() << " wins!" << endl;
+            else if (done == -1)
+                cout << "No winning line. " << player[1]->getName() << " wins!\n"
+                     << endl;
         }
-        else if (gStatus == -1)
-        {
-            cout << "Eater wins!" << endl;
-            return true;
-        }
-        else
-            return false;
+
+        cout << "-----GAME OVER-----" << endl;
     }
 };
 
