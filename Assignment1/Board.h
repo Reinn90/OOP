@@ -104,8 +104,9 @@ bool Board::checkWin(int x, int y)
     if (x >= 0 && x < dim && y >= 0 && y < dim && board[x][y] == 1)
     {
 
-        if (x >= dim - 1 && board[x][y] == 1) 
+        if (x >= dim - 1 && board[x][y] == 1) //if it gets to the bottom row
             return true;
+
         if (checkWin(x + 1, y - 1))
             return true; // bottom left
         if (checkWin(x + 1, y + 1))
@@ -121,7 +122,7 @@ int Board::gameStatus()
     // Passer win condition - recursion technique
     for (int col = 0; col < dim; col++)
     {
-        if (checkWin(0, col) == true) return 1;    
+        if (checkWin(0, col) == true) return 1;    //checks every column of the top row
     }
 
     // Eater win condition - when board is full
@@ -153,7 +154,7 @@ void Board::displayBoard() const
         if (i < 9)
             cout << " |";
         else
-            cout << "|"; // re-allign vertical grid for board > 10 boardSizeension
+            cout << "|"; // re-allign vertical grid for board > 10 boardSize
 
         for (int j = 0; j < dim; j++)
         {

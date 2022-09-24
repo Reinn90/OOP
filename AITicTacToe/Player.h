@@ -21,6 +21,7 @@ public:
 	char getPlayerSymbol() {
 		return playerSymbol;
 	}
+
 };
 
 #endif /* PLAYER_H_ */

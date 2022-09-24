@@ -2,12 +2,15 @@
  * Kevin Reyes - 20658133
  */
 
-#ifndef NOVICEPLAYER
-#define NOVICEPLAYER
 
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <vector>
+
+#ifndef NOVICEPLAYER
+#define NOVICEPLAYER
+
 
 using namespace std;
 

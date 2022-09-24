@@ -11,6 +11,7 @@
 class HumanPlayer : public Player
 {
 public:
+
 	HumanPlayer(char ps) : Player(ps) {}
 	~HumanPlayer() {}
 
