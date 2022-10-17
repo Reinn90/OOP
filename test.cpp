@@ -1,13 +1,33 @@
+#include <iostream>
+class B {
+public:B();
+  B(int nn);
+  void f();
+protected:
+  void g();
+private:
+  int n;
+};
 
-int x;
-int *p;
-int q;
+class D : public B {
+public:
+  D(int nn, float dd);
+protected:
+  void h();
+private:
+  void k();
+  double d;
+};
 
-int main(){
 
-  *p = 56;
+int main() {
 
-   *p = q;
+  D obj(1,1.2);
 
-    return 0;
+  obj.f();
+
+  obj.k();
+
+
+  return 0;
 }

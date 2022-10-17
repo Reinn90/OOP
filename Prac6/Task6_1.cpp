@@ -9,7 +9,7 @@ class Counted
 public:
     Counted()
     {
-        // count = 0
+        // count = 0;
         cout << "No " << ++count << " object is created \n";
     }
 };

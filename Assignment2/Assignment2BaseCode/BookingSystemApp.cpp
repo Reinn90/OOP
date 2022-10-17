@@ -2,7 +2,17 @@
  * BookingSystem.cpp
  *
  *      Author: dongmo
+ * 
+ * DECLARATION
+ * I hereby certify that no part of this assignment has been copied from any other student’s work or
+ * from any other source. No part of the code has been written/produced for me by another person
+ * or copied from any other source.
+ * 
+ * Nowell Kevin Reyes - 20658133
+ * COMP 2014 - OOP - Friday 3pm Tutorial
  */
+
+
 
 #include <iostream>
 #include <fstream>
@@ -27,6 +37,7 @@ using namespace std;
 #ifndef BookingSystem_CPP_
 #define BookingSystem_CPP_
 
+// FULL REQUIREMENT TEST
 void classTest1()
 {
 	cout << "Test CustomerRequirement class ... " << endl;
@@ -61,99 +72,105 @@ void classTest1()
 	cout << "  - Latest game day: " << requirementList[0].latestGameDay() << endl;
 }
 
+// FLIGHT TICKET TEST
 void classTest2()
 {
 	cout << "Test FlightTicket class ... " << endl;
 
 	FlightTicket *tickets[2];
-	tickets[0] = new FlightTicket(0, 0);
-	tickets[1] = new FlightTicket(1, 14);
+	tickets[0] = new FlightTicket(0, 0);  // fly in, which day
+	tickets[1] = new FlightTicket(1, 14); // fly out, which day ie day 14
 
 	for (int i = 0; i < 2; i++)
 		tickets[i]->printTicket();
 }
 
+// HOTEL VOUCHER TEST
 void classTest3()
 {
 	cout << "Test HotelVoucher class ... " << endl;
 
-	// HotelVoucher *vouchers[3];
-	// vouchers[0] = new HotelVoucher("Gold", 0, 0.0);
-	// vouchers[1] = new HotelVoucher("Bronze", 5,0.2);
-	// vouchers[2] = new HotelVoucher("Regular", 7, 0.4);
+	HotelVoucher *vouchers[3];
+	vouchers[0] = new HotelVoucher("Gold", 0, 0.0); // last argument to be calculated
+	vouchers[1] = new HotelVoucher("Bronze", 5, 0.2);
+	vouchers[2] = new HotelVoucher("Regular", 7, 0.4);
 
-	// for (int i = 0; i < 3; i++)
-	// 	vouchers[i]->printTicket();
+	for (int i = 0; i < 3; i++)
+		vouchers[i]->printTicket();
 }
 
+// GAME TICKET TEST
 void classTest4()
 {
 	cout << "Test GameTicket class ... " << endl;
 
-	// GameTicket *tickets[3];
-	// tickets[0] = new GameTicket(2);
-	// tickets[1] = new GameTicket(5);
-	// tickets[2] = new GameTicket(14);
+	GameTicket *tickets[3];
+	tickets[0] = new GameTicket(2, 80); // GameTicket(gameNumber, gamePriceMap[gameNumber])
+	tickets[1] = new GameTicket(5, 480);
+	tickets[2] = new GameTicket(14, 800);
 
-	// for (int i = 0; i < 3; i++)
-	// 	tickets[i]->printTicket();
+	for (int i = 0; i < 3; i++)
+		tickets[i]->printTicket();
 }
 
+// REQUIREMENT CREATOR
 void classTest5()
 {
 	cout << "\nTest RequirementCreator Class ... " << endl;
-	// RequirementCreator rg;
-	// rg.createCutomerBundle();
-	// rg.writeBundle();
+	RequirementCreator rg;
+	rg.createCustomerBundle();
+	rg.writeBundle();
 }
 
+// PACKAGE TEST
 void classTest6()
 {
 	cout << "\nTest Package class: \nExample package 1 ... " << endl;
-	// Package p;
-	// p.addFlightTicket(0, 3);
-	// p.addFlightTicket(1, 8);
-	// p.addGameTicket(2);
-	// p.addGameTicket(5);
-	// p.addGameTicket(14);
+	Package p;
+	p.addFlightTicket(0, 3);
+	p.addFlightTicket(1, 8);
+	p.addGameTicket(2);
+	p.addGameTicket(5);
+	p.addGameTicket(14);
 
-	// p.addHotelVoucher("Regular", 4, 0.0);
-	// p.addHotelVoucher("Bronze", 8, 0.0);
-	// p.addHotelVoucher("Gold", 0, 0.0);
+	p.addHotelVoucher("Regular", 4, 0.0);
+	p.addHotelVoucher("Bronze", 8, 0.2);
+	p.addHotelVoucher("Gold", 0, 0.4);
 
-	// p.printPackage();
+	p.printPackage();
 
-	// cout << "\nTest Package class: \nExmaple package 2... " << endl;
-	// Package p2;
-	// p2.addFlightTicket(0, 3);
-	// p2.addFlightTicket(1, 6);
-	// p2.addGameTicket(1);
-	// p2.addGameTicket(7);
-	// p2.addGameTicket(8);
+	cout << "\nTest Package class: \nExample package 2... " << endl;
+	Package p2;
+	p2.addFlightTicket(0, 3);
+	p2.addFlightTicket(1, 6);
+	p2.addGameTicket(1);
+	p2.addGameTicket(7);
+	p2.addGameTicket(8);
 
-	// p2.addHotelVoucher("Gold", 3, 0.0);
-	// p2.addHotelVoucher("Regular", 4, 0.2);
-	// p2.addHotelVoucher("Gold", 5, 0.4);
+	p2.addHotelVoucher("Gold", 3, 0.4);
+	p2.addHotelVoucher("Regular", 4, 0.2);
+	p2.addHotelVoucher("Gold", 5, 0.4);
 
-	// p2.printPackage();
+	p2.printPackage();
 }
 
+// BOOKING SYSTEM
 void classTest7()
 {
-	// BookingSystem agent;
-	// agent.readCustomerRequirements();
-	// agent.generatePackages();
+	BookingSystem agent;
 
-	// cout<<"\nGenerated valid packages: " << endl;
-	// agent.printSuccessfulPackages();
+	agent.readCustomerRequirements();
+
+	agent.generatePackages();
+
+	agent.printSuccessfulPackages();
 }
 
 int main()
 {
 	srand(time(0)); // seed random number generator
 
-	// SmartBookingSystem smartagent;
-
+	SmartBookingSystem smartagent;
 	cout << "Choose a class to test: " << endl;
 	cout << "1. Test CustomerRequirement class" << endl;
 	cout << "2. Test FlightTicket class" << endl;
@@ -192,11 +209,12 @@ int main()
 		classTest7();
 		break;
 	case 8:
-		// 	smartagent.readCustomerRequirements();
-		// 	smartagent.generatePackages();
-		// 	smartagent.printSuccessfulPackages();
-		// //	agent.printUnsuccessfulPackages();
-		// 	smartagent.vacancy();
+
+		smartagent.readCustomerRequirements();
+		smartagent.generatePackages();
+		smartagent.printSuccessfulPackages();
+		// smartagent.printUnsuccessfulPackages();
+		smartagent.vacancy();
 		break;
 	case 9:
 		cout << "Bye!" << endl;

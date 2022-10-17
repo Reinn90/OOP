@@ -7,22 +7,23 @@
 #ifndef FLIGHTTICKET_H_
 #define FLIGHTTICKET_H_
 
-class FlightTicket: public Ticket {
+class FlightTicket : public Ticket
+{
 private:
     int flightType; // 0 for departure, 1 for return
 public:
-    FlightTicket(int ft, int d) :
-            Ticket(d, 2000) {
+    FlightTicket(int ft, int d) : Ticket(d, 2000) // ft = d, Ticket.fullprice = 2000
+    {
         flightType = ft;
-        discount = (1.0 - flightType) * day * 0.05
-                + flightType * (NUMBEROFDAYS - 1.0 - day) * 0.05;
+        discount = (1.0 - flightType) * day * 0.05 + flightType * (NUMBEROFDAYS - 1.0 - day) * 0.05;
     }
 
-    void printTicket() {
+    void printTicket()
+    {
         string type = flightType == 0 ? "Sydney to New York" : "New York to Sydney";
 
         cout << "Flight ticket from " << type << " on day " << day
-                << " at price $" << getTicketPrice() << endl;
+             << " at price $" << getTicketPrice() << endl;
     }
 };
 

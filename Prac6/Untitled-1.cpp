@@ -9,8 +9,8 @@ int main()
     while (n>0)
     {
         --n ;
-        cout << ++count_1 << endl ;
-        cout << count_2++ << endl ;
+        cout << ++count_1 << endl ; // increment first then evaluate(display)
+        cout << count_2++ << endl ; // display first then increment
         cout << endl ;
     }
     cout << "final value for count_1 = " << count_1 << endl ;

@@ -11,7 +11,7 @@ class Account
     int term; // months until maturity
 
 public:
-    Account(){}
+    Account() {}
     ~Account() {}
 
     virtual void printResults() = 0; // pure virtual function
@@ -68,7 +68,7 @@ struct LoanAccount : public Account
     LoanAccount() {}
     ~LoanAccount() {}
 
-    void printResults() //overrider
+    void printResults() // overrider
     {
         // test loan account
         cout << "\nTest loan account --- " << endl;
@@ -83,16 +83,16 @@ struct LoanAccount : public Account
 
 int main()
 {
-    Account *d = new DepositAccount;
-    Account *l = new LoanAccount;
+    // Task 6.5
+    Account *account[2] = {new DepositAccount, new LoanAccount};
 
-    d->inputData();
-    d->printResults();
+    account[0]->inputData();
+    account[0]->printResults();
 
-    l->inputData();
-    l->printResults();
+    account[1]->inputData();
+    account[1]->printResults();
 
-    delete d, l;
+    delete[] account;
 
     return 0;
 }
