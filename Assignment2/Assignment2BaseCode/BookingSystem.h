@@ -9,7 +9,7 @@ protected:
 
     int flightTickets[2][NUMBEROFDAYS];
     int hotelVacancy[3][NUMBEROFDAYS - 1]; // 1 less day since no hotel booking final day
-    int gameTickets[NUMBEROFGAMES];
+    int gameTickets[NUMBEROFGAMES]
 
     bool games[NUMBEROFGAMES];
 
