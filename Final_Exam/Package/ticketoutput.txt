@@ -1,0 +1,60 @@
+Train Ticket:
+Ticket Code:     RKUAUOVV
+Customer Name:   Haiden Curtis
+Date:  31/07/2021     Price:  $143.61
+
+Train Ticket:
+Ticket Code:     ZLJNWAWE
+Customer Name:   Keaton Salinas
+Date:  12/12/2021     Price:  $53.49
+
+Train Ticket:
+Ticket Code:     GBJVPPWF
+Customer Name:   Gerardo Salazar
+Date:  23/06/2021     Price:  $59.17
+
+Train Ticket:
+Ticket Code:     WBEYIXWS
+Customer Name:   Austin Mckee
+Date:  01/02/2021     Price:  $94.89
+
+Flight Ticket:
+Ticket Number:  35719056
+Customer Name:   Aurora Rogers
+Date:  12/10/2021     Price:  $1326.56
+
+Flight Ticket:
+Ticket Number:  49386750
+Customer Name:   Ayana Haynes
+Date:  23/05/2021     Price:  $1182.91
+
+Flight Ticket:
+Ticket Number:  51012605
+Customer Name:   Taliyah Chandler
+Date:  02/09/2021     Price:  $1878.12
+
+Flight Ticket:
+Ticket Number:  89323871
+Customer Name:   Jamari Washington
+Date:  13/05/2021     Price:  $1008.78
+
+Flight Ticket:
+Ticket Number:  58368762
+Customer Name:   Taniya Sims
+Date:  31/05/2021     Price:  $1641.78
+
+Flight Ticket:
+Ticket Number:  89849038
+Customer Name:   Amira Dean
+Date:  11/07/2021     Price:  $1497.53
+
+Flight Ticket:
+Ticket Number:  96732189
+Customer Name:   Bianca Fitzgerald
+Date:  12/07/2021     Price:  $1279.53
+
+Flight Ticket:
+Ticket Number:  52110668
+Customer Name:   Destinee Huerta
+Date:  22/06/2021     Price:  $1821.41
+

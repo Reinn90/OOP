@@ -6,6 +6,7 @@ using namespace std;
 
 class Account
 {
+protected:
     double initialBalance;
     double interestRate;
     int term; // months until maturity
