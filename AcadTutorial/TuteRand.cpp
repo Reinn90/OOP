@@ -9,12 +9,12 @@ using namespace std;
 int main() {
     srand(time(0));
 
-    cout >> "How many students are attending the tutorial? \n";
+    cout << "How many students are attending the tutorial? \n";
     int attendees;
 
     cin >> attendees;
 
-    for (int i = 0; i < 70; j++) {
+    for (int i = 0; i < 70; i++) {
         cout << "#";
     }
 
@@ -23,7 +23,7 @@ int main() {
     cout << "\n\t\t   *No Vibe-Coding allowed here*\n";
 
     for (int i = 0; i < 70; i++) {
-        cout << "#"
+        cout << "#";
     }
 
     int num;
@@ -32,3 +32,4 @@ int main() {
     cout << endl;
     cout << "\nIt's student " << num << "'s turn.";
     return 0;
+}
