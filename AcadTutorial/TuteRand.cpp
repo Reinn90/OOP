@@ -37,9 +37,9 @@ void printWelcomeBanner(int n) {
     }
 }
 
-void randomiseCall(int stnum) {
+void randomiseCall(int &stnum) {
 
-    if (stnum != 0) {
+    if (stnum == 0) {
         int n = rand() % stnum + 1;
 
         cout << endl;
