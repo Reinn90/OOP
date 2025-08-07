@@ -3,24 +3,16 @@
 
 using namespace std;
 
-// const int COST_OVER_LAND = 70;
-// const int COST_UNDER_WATER = 95;
-const int MAX_FACTORY_DISTANCE = 8000;
-
-void getRiverWidth(float &width) {
+void getDistances(float &width, float &dist) {
     do {
         cout << "Please enter the width of the river (in km): ";
         cin >> width;
         width = width * 1000; // convert to meters
-    } while (width < 0);
-}
 
-void getFactoryDistance(float &dist) {
-    do {
-        cout << "Please enter the distance of the factory downstream (in km): ";
+        cout << "And the distance of the factory downstream (in km): ";
         cin >> dist;
         dist = dist * 1000; // convert to meters
-    } while (dist < 0);
+    } while (width < 0 || dist < 0);
 }
 
 void getPowerLineCost(float &underWaterCost, float &overLandCost) {
@@ -34,13 +26,11 @@ void getPowerLineCost(float &underWaterCost, float &overLandCost) {
     } while (underWaterCost <= 0 || overLandCost <= 0);
 }
 
-float calcUnderwaterCost(float riverWidth, float factoryDistance,
+float calcUnderwaterCost(float riverWidth, int factoryDistance,
                          float underwaterLineCost) {
-    // Over land line  = 8000 - factoryDistance
-    double overLandLine = 8000 - factoryDistance;
 
     float underWaterLine =
-        sqrt(riverWidth * riverWidth + overLandLine * overLandLine);
+        sqrt(riverWidth * riverWidth + factoryDistance * factoryDistance);
     return underWaterLine * underwaterLineCost;
 }
 
@@ -55,40 +45,32 @@ int main() {
     // and how long over land to achieve MIN cost.
 
     // get user input for distances and cost
-    getRiverWidth(w); // a)
-    // getFactoryDistance(d);            // b)
+    getDistances(w, d);               // a & b)
     getPowerLineCost(uwCost, olCost); // c & d
 
+    cout << "\n##### User input #####" << endl;
     cout << "River width: " << w << " meters." << endl;
-    // cout << "Distance of Factory: " << d << " meters." << endl;
+    cout << "Distance of Factory: " << d << " meters." << endl;
     cout << "Underwater Laying Cost: $" << uwCost << "/meter." << endl;
     cout << "Over land Laying Cost: $" << olCost << "/meter." << endl;
 
-    for (d = 0; d <= 8000; d++) {
-        uwLineCost = calcUnderwaterCost(w, d, uwCost);
-        // cout << "UWL Cost: $ " << uwLineCost << endl;
+    for (int x = 0; x <= (int)d; x++) {
+        uwLineCost = calcUnderwaterCost(w, x, uwCost);
 
-        olLineCost = d * olCost;
-        // cout << "OLL Cost: $ " << olLineCost << endl;
+        olLineCost = (d - x) * olCost;
 
         totalCost = uwLineCost + olLineCost;
-        // cout << "Total Cost: $ " << totalCost << endl << endl;
 
         // if a smaller total is found, record it and print to console
         if (totalCost < minCost) {
             minCost = totalCost;
-            bestLandDist = d;
-            // cout << "New minimum total cost is: $" << minCost << endl;
+            bestLandDist = x;
         }
     }
 
-    float bestUWDist;
+    float bestUWDist = sqrt(bestLandDist * bestLandDist + w * w);
 
-    int x = MAX_FACTORY_DISTANCE - bestLandDist;
-
-    bestUWDist = sqrt(x * x + w * w);
-
-    cout << "Best Over Land distance is: " << bestLandDist << " meters."
+    cout << "Best Over Land distance is: " << d - bestLandDist << " meters."
          << endl;
     cout << "Best Underwater distance is: " << bestUWDist << " meters." << endl;
     cout << "Minimum Total Cost: $" << minCost << endl;
