@@ -25,6 +25,13 @@ int search(const int a[], int numberUsed, int target) {
     bool found = false;
 
     // Add your code here for Task 3.1
+    for (int i = 0; i < numberUsed; i++) {
+
+        if (a[i] == target && !found) {
+            found = true;
+            index = i;
+        }
+    }
 
     if (found)
         return index;
@@ -40,7 +47,7 @@ int main() {
     cout << "Enter a number to search for: ";
     cin >> target;
 
-    result = search(arr, listSize, target);
+    int result = search(arr, listSize, target);
     if (result == -1)
         cout << target << " is not on the list.\n";
     else
