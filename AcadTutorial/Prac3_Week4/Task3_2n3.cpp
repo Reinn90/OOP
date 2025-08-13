@@ -28,7 +28,8 @@ void displayBoard(int board[][3]) {
 }
 
 bool isValidMove(int board[][3], int x, int y) {
-    if (board[x][y] == 0) // Add your code here)
+    if (0 <= x && x <= 2 && 0 <= y && y <= 2 &&
+        board[x][y] == 0) // Add your code here)
         return true;
     else {
 
@@ -62,13 +63,35 @@ int gameStatus(int board[][3], int &noOfMoves) {
 
     // Add your code here
 
+    for (int row = 0; row < 3; row++) {
+        if (board[row][0] != 0 && (board[row][0] == board[row][1]) &&
+            (board[row][1] == board[row][2]))
+            return board[row][0];
+    }
+
     // Check columns for a win
 
     // Add your code here
+    for (int col = 0; col < 3; col++) {
+        if (board[0][col] != 0 && (board[0][col] == board[1][col]) &&
+            (board[1][col] == board[2][col]))
+            return board[0][col];
+    }
 
     // Check diagonals for a win
 
     // Add your code here
+    // Top left to bottom right
+    if (board[0][0] != 0 && (board[0][0] == board[1][1]) &&
+        (board[1][1] == board[2][2])) {
+        return board[0][0];
+    }
+
+    // Botom left to Top right
+    if (board[2][0] != 0 && (board[2][0] == board[1][1]) &&
+        (board[1][1] == board[0][2])) {
+        return board[0][0];
+    }
 
     if (noOfMoves >= 9)
         return 2;
