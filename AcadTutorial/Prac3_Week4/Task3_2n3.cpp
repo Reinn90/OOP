@@ -28,10 +28,14 @@ void displayBoard(int board[][3]) {
 }
 
 bool isValidMove(int board[][3], int x, int y) {
-    if (true) // Add your code here)
+    if (board[x][y] == 0) // Add your code here)
         return true;
-    else
+    else {
+
+        cout << "Those coordinates are invalid. Please input new row and "
+                "column values. ";
         return false;
+    }
 }
 
 bool getXOMove(int board[][3], int noOfMoves, int &x, int &y) {
