@@ -90,7 +90,7 @@ int gameStatus(int board[][3], int &noOfMoves) {
     // Botom left to Top right
     if (board[2][0] != 0 && (board[2][0] == board[1][1]) &&
         (board[1][1] == board[0][2])) {
-        return board[0][0];
+        return board[0][2];
     }
 
     if (noOfMoves >= 9)
