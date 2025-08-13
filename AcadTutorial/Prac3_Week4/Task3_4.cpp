@@ -11,7 +11,14 @@ using namespace std;
 
 void printGrid(int grid[][9]) {
     for (int i = 0; i < 9; i++) {
+
+        if (i % 3 == 0)
+            cout << "\n";
+
         for (int j = 0; j < 9; j++) {
+            if (j % 3 == 0)
+                cout << " ";
+
             char symbol;
 
             if (grid[i][j] == 1)
